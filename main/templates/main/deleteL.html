@@ -1,0 +1,25 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Delete List
+{% endblock %}
+
+{% block content %}
+<h3 class="display-4">Select lists to be deleted</h3>
+<form method="post" action="#">
+    {% csrf_token %}
+
+{% for item in ls %}
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <div class="input-group-text">
+                <input type="checkbox" name="l{{item.id}}" value="clicked">
+            </div>
+        </div>
+        <input type="text" class="form-control" value="{{item.name}}" readonly>
+    </div>
+{% endfor %}
+</ul>
+<button type="submit" name="DeleteList" value="DeleteList" class="btn btn-danger btn-lg"  >Delete</button>
+</form>
+{% endblock %}

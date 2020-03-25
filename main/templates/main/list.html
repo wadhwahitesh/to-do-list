@@ -1,0 +1,47 @@
+{% extends 'main/base.html' %}
+{% block title %}
+View List
+{% endblock %}
+{% block content %}
+
+<div class="p-3 mb-2 bg-dark text-white" xmlns="http://www.w3.org/1999/html"><h1 class="display-3">{{ls.name}}</h1></div>
+
+<form method="post" action="">
+    {% csrf_token %}
+    {% if ls.item_set.all.count is not 0 %}
+    <ul class="list-group list-group-flush">
+        {% for item in ls.item_set.all %}
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+            {% if not item.complete %}
+                 <input type="checkbox"  name="c{{item.id}}"  value="clicked" class="">
+            {% else %}
+                 <input type="checkbox"  name="c{{item.id}}"  value="clicked" checked>
+            {% endif %}
+                    </div>
+                </div>
+                <input type="text" class="form-control" value="{{item.text}}" readonly>
+            </div>
+        {% endfor %}
+    </ul>
+        <button type="submit"  name="save" value="save" class="btn btn-link">Save</button>
+    {% else %}
+        <h3 class="display-4">[List Empty]</h3>
+    {% endif %}
+
+
+        <br><br>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <button type="submit" name="NewEntry"  value="NewEntry" class="btn btn-success">Enlist</button>
+            </div>
+            <input type="text" name="new">
+        </div>
+         <br><br>
+        <button type="submit" name="DeleteItem" value="delete{{ls.id}}/" class="btn btn-warning">Delete Item</button>
+        <button type="submit" name="deleteAll" value="deleteALl" class="btn btn-danger">Delete Entire List</button>
+        <br><br>
+        <button type="submit" name="Back" value="Back" class="btn btn-secondary">Back</button>
+</form>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'base.html'  %}
+
+{% block title %}
+Even Odd
+{% endblock %}
+
+{% block body %}
+<h1>Even</h1>
+<ul>
+    {% for i in range %}
+        {% if i|divisibleby:2  %}
+             <li>{{i}}</li>
+        {% endif %}
+    {% endfor %}
+</ul>
+<h1>Odd</h1>
+<ul>
+    {% for i in range %}
+        {% if not i|divisibleby:2 %}
+             <li>{{i}}</li>
+        {% endif %}
+    {% endfor %}
+</ul>
+{% endblock %}
